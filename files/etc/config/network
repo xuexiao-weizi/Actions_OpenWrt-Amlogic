@@ -1,0 +1,86 @@
+
+config interface 'loopback'
+	option ifname 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config globals 'globals'
+
+config interface 'lan'
+	option proto 'static'
+	option netmask '255.255.255.0'
+	option ip6assign '60'
+	option _orig_ifname 'eth0 wlan0'
+	option _orig_bridge 'true'
+	option ipaddr '192.168.1.3'
+	option type 'bridge'
+	option igmp_snooping '1'
+	option ifname 'eth0 eth0.1'
+
+config interface 'VPN'
+	option ifname 'ipsec0'
+	option proto 'static'
+	option ipaddr '10.10.10.1'
+	option netmask '255.255.255.0'
+
+config interface 'vpn0'
+	option ifname 'tun0'
+	option proto 'none'
+
+config interface 'docker'
+	option ifname 'docker0'
+	option proto 'none'
+	option auto '0'
+
+config device
+	option type 'bridge'
+	option name 'docker0'
+
+config interface 'wan'
+	option proto 'pppoe'
+	option ifname 'eth0.2'
+	option username '2:2v45jTUtmcJx'
+	option ipv6 'auto'
+	option keepalive '0'
+	option password '123456'
+	option metric '100'
+
+config interface 'wan3'
+	option proto 'pppoe'
+	option ifname 'eth0.4'
+	option username '13782482918'
+	option password '804118'
+	option ipv6 'auto'
+	option keepalive '0'
+	option metric '300'
+	option delegate '0'
+
+config interface 'wan1'
+	option proto 'static'
+	option ifname 'eth0.3'
+	option ipaddr '10.106.181.186'
+	option netmask '255.255.254.0'
+	option gateway '10.106.180.1'
+	option dns '202.102.224.68 202.102.227.68'
+	option macaddr '08:ff:24:ae:1c:5a'
+	option metric '500'
+
+config route
+	option interface 'wan1'
+	option target '10.0.0.0'
+	option netmask '255.0.0.0'
+	option gateway '10.106.180.1'
+
+config route
+	option interface 'wan1'
+	option target '225.0.0.0'
+	option netmask '255.0.0.0'
+	option gateway '10.106.180.1'
+
+config route
+	option interface 'wan1'
+	option target '232.100.0.0'
+	option netmask '255.255.0.0'
+	option gateway '10.106.180.1'
+
